@@ -32,6 +32,7 @@ class ShipSpec extends Specification {
 
 		expect:
 		!ship.validate()
+		false
 
 		where:
 		name        | description
