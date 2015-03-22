@@ -26,7 +26,7 @@ environments {
 			username = "dm844demo_dev"
 			password = "dm844"
 			dbCreate = "create-drop" // one of 'create', 'create-drop', 'update', 'validate', ''
-			url = "jdbc:postgresql://localhost:5432/dm844demo_dev"
+			url = "jdbc:mysql://localhost:3306/dm844demo_dev"
 		}
 	}
 	test {
