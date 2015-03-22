@@ -1,3 +1,16 @@
+environments {
+	development {
+		grails {
+			mongo {
+				connectionString = "mongodb://localhost/dm844_dev"
+				createDrop      = "database"    // Recreate whole database.
+				databaseName    = "dm844_dev"
+			}
+		}
+	}
+}
+
+/*
 dataSource {
     pooled = true
     jmxExport = true
@@ -62,3 +75,4 @@ environments {
         }
     }
 }
+*/
