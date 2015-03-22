@@ -19,14 +19,17 @@ hibernate {
 
 // environment specific settings
 environments {
-    development {
-        dataSource {
-            dbCreate = "create-drop" // one of 'create', 'create-drop', 'update', 'validate', ''
-//            url = "jdbc:h2:mem:devDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE"
-            url = "jdbc:h2:devDB:devDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE"
-        }
-    }
-    test {
+	development {
+		dataSource {
+			driverClassName = "com.mysql.jdbc.Driver"
+			dialect = "org.hibernate.dialect.MySQLInnoDBDialect"
+			username = "dm844demo_dev"
+			password = "dm844"
+			dbCreate = "create-drop" // one of 'create', 'create-drop', 'update', 'validate', ''
+			url = "jdbc:postgresql://localhost:5432/dm844demo_dev"
+		}
+	}
+	test {
         dataSource {
             dbCreate = "update"
             url = "jdbc:h2:mem:testDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE"
