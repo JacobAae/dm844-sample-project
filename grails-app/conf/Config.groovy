@@ -114,4 +114,9 @@ log4j.main = {
            'org.springframework',
            'org.hibernate',
            'net.sf.ehcache.hibernate'
+
+	debug 'grails.app'
+	debug 'org.hibernate.SQL'
+	trace 'org.hibernate.type.descriptor.sql.BasicBinder'
+
 }
