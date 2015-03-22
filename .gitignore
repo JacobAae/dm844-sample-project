@@ -1,1 +1,4 @@
-unwanted.txt
+target/
+devDB:devDb*
+dm844-sample-project-grailsPlugins.iml
+dm844-sample-project.iml
