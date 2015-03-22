@@ -22,7 +22,7 @@ environments {
 	development {
 		dataSource {
 			driverClassName = "com.mysql.jdbc.Driver"
-			dialect = "org.hibernate.dialect.MySQLInnoDBDialect"
+			dialect = "org.hibernate.dialect.MySQL5Dialect"
 			username = "dm844demo_dev"
 			password = "dm844"
 			dbCreate = "create-drop" // one of 'create', 'create-drop', 'update', 'validate', ''
