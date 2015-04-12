@@ -4,7 +4,7 @@ import geb.Page
 
 class ShowPage extends Page {
 
-    static url = "bsg/ship/show"
+    static url = "ship/show"
 
     static at = {
         title ==~ /Show Ship/

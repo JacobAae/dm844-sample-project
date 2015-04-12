@@ -1,2 +1,5 @@
+import grails.util.BuildSettings
 
-baseUrl = "http://localhost:8080/"
+
+System.setProperty(BuildSettings.FUNCTIONAL_BASE_URL_PROPERTY, 'http://localhost:8080/bsg')
+//baseUrl = "http://localhost:8080/"

@@ -6,7 +6,7 @@ import modules.ship.ShipInfoModule
 
 class EditPage extends Page {
 
-    static url = "bsg/ship/edit"
+    static url = "ship/edit"
 
     static at = {
         title ==~ /Edit Ship/
