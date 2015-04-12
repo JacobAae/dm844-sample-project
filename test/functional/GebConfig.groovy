@@ -1,2 +1,2 @@
 
-baseUrl = "http://localhost:8080/bsg/"
+baseUrl = "http://localhost:8080/"
