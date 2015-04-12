@@ -4,6 +4,13 @@ import grails.test.spock.IntegrationSpec
 
 class ShipIntegrationSpec extends IntegrationSpec {
 
+	def setup() {
+		// A bit ugly, but lets clear db first of any ships
+		Ship.list()*.id.each {
+			Ship.get(it).delete()
+		}
+	}
+
 	// tag::save-get[]
 	void "Test saving and retrieving a Ship"() {
 		given:
@@ -16,7 +23,7 @@ class ShipIntegrationSpec extends IntegrationSpec {
 		ship.save()
 
 		then:
-		Ship.get(ship.id).name == 'Battlestar Galactica'
+		Ship.get(ship.id).name == 'X-Battlestar Galactica'
 	}
 	// end::save-get[]
 
@@ -44,7 +51,7 @@ class ShipIntegrationSpec extends IntegrationSpec {
 		createShipsInTheDatabase()
 
 		when:
-		Ship ship = Ship.findByName('Cloud 9')
+		Ship ship = Ship.findByName('X-Cloud 9')
 
 		then:
 		ship
@@ -63,7 +70,7 @@ class ShipIntegrationSpec extends IntegrationSpec {
 		then:
 		ships
 		ships.size() == 2
-		ships*.name.containsAll(['Battlestar Galactica', 'Battlestar Pegasus'])
+		ships*.name.containsAll(['X-Battlestar Galactica', 'X-Battlestar Pegasus'])
 	}
 	// end::findAllBy[]
 
@@ -79,7 +86,7 @@ class ShipIntegrationSpec extends IntegrationSpec {
 		then:
 		ships
 		ships.size() == 2
-		ships*.name.containsAll(['Battlestar Galactica', 'Battlestar Pegasus'])
+		ships*.name.containsAll(['X-Battlestar Galactica', 'X-Battlestar Pegasus'])
 	}
 	// end::findAllBy2[]
 
@@ -96,7 +103,7 @@ class ShipIntegrationSpec extends IntegrationSpec {
 
 		then:
 		largestCrew
-		largestCrew.name == 'Cloud 9'
+		largestCrew.name == 'X-Cloud 9'
 		largestCrew == Ship.list( max:1, sort: 'crewsize', order: 'desc').first()
 	}
 	// end::where-query[]
@@ -116,7 +123,7 @@ class ShipIntegrationSpec extends IntegrationSpec {
 		then:
 		ships
 		ships.size() == 2
-		ships*.name.containsAll(['Astral Queen', 'Cloud 9'])
+		ships*.name.containsAll(['X-Astral Queen', 'X-Cloud 9'])
 	}
 	// end::where-query2[]
 
@@ -137,7 +144,7 @@ class ShipIntegrationSpec extends IntegrationSpec {
 		then:
 		ships
 		ships.size() == 2
-		ships*.name == ['Astral Queen', 'Colonial One']
+		ships*.name == ['X-Astral Queen', 'X-Colonial One']
 	}
 	// end::criteria-query[]
 
@@ -153,7 +160,7 @@ class ShipIntegrationSpec extends IntegrationSpec {
 		then:
 		ships
 		ships.size() == 2
-		ships*.name == ['Cloud 9', 'Battlestar Pegasus']
+		ships*.name == ['X-Cloud 9', 'X-Battlestar Pegasus']
 
 	}
 	// end::hql-query[]
@@ -178,7 +185,7 @@ class ShipIntegrationSpec extends IntegrationSpec {
     // tag::getFullyPopulatedShip[]
 	Ship getFullyPopulatedShip() {
 		new Ship(
-				name: "Battlestar Galactica",
+				name: "X-Battlestar Galactica",
 				crewsize: 1337,
 				productionDate: new Date(),
 				description: "Military headquarter",
@@ -190,11 +197,11 @@ class ShipIntegrationSpec extends IntegrationSpec {
 	// tag::db-ships[]
 	private createShipsInTheDatabase() {
 		[
-		        ['Battlestar Galactica', 1337, Shiptype.MILITARY],
-		        ['Battlestar Pegasus', 2143, Shiptype.MILITARY],
-		        ['Colonial One', 142, Shiptype.ADMINISTRATION],
-		        ['Astral Queen', 564, Shiptype.ACCOMODATION],
-		        ['Cloud 9', 6542, Shiptype.ACCOMODATION]
+		        ['X-Battlestar Galactica', 1337, Shiptype.MILITARY],
+		        ['X-Battlestar Pegasus', 2143, Shiptype.MILITARY],
+		        ['X-Colonial One', 142, Shiptype.ADMINISTRATION],
+		        ['X-Astral Queen', 564, Shiptype.ACCOMODATION],
+		        ['X-Cloud 9', 6542, Shiptype.ACCOMODATION]
 
 		].each {
 			new Ship(name: it[0], crewsize: it[1], shiptype: it[2], description: 'N/A', productionDate: new Date()).save(failOnError: true)

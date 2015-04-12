@@ -4,6 +4,15 @@ import grails.test.spock.IntegrationSpec
 
 class PersonIntegrationSpec extends IntegrationSpec {
 
+	def setup() {
+		// A bit ugly, but lets clear db first
+		Person.list()*.id.each {
+			Person.get(it).delete()
+		}
+		Ship.list()*.id.each {
+			Ship.get(it).delete(flush: true)
+		}
+	}
 
 	// tag::add-to[]
 	void "Test we can add a crewmember to a ship"() {

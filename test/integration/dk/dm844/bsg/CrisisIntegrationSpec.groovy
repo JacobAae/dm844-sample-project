@@ -6,7 +6,15 @@ class CrisisIntegrationSpec extends IntegrationSpec {
 
 	// tag::crisis-handling-setup[]
     def setup() {
-	    Ship battlestarGalactica = new Ship(name: 'Battlestar Galactica', crewsize: 1337, shiptype: Shiptype.MILITARY, productionDate: new Date()).save(failOnError: true)
+	    // A bit ugly, but lets clear db first
+	    Person.list()*.id.each {
+		    Person.get(it).delete()
+	    }
+	    Ship.list()*.id.each {
+		    Ship.get(it).delete(flush: true)
+	    }
+
+	    Ship battlestarGalactica = new Ship(name: 'Galactica', crewsize: 1337, shiptype: Shiptype.MILITARY, productionDate: new Date()).save(failOnError: true)
 	    battlestarGalactica.addToCrewmembers(name: 'Kara Trace')
 	    battlestarGalactica.addToCrewmembers(name: 'Lee Adama')
 	    battlestarGalactica.addToCrewmembers(name: 'Sharon Agathon')
@@ -37,7 +45,7 @@ class CrisisIntegrationSpec extends IntegrationSpec {
 	    crisis.affectedShips.size() == 2
 
 	    when:
-	    Ship battlestarGalactica = Ship.findByName('Battlestar Galactica')
+	    Ship battlestarGalactica = Ship.findByName('Galactica')
 
 	    then:
 	    battlestarGalactica.affectedBy

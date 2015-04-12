@@ -23,6 +23,11 @@ grails.project.fork = [
 
 grails.project.dependency.resolver = "maven" // or ivy
 grails.project.dependency.resolution = {
+
+    def gebVersion = "0.10.0"
+    def seleniumVersion = "2.45.0"
+
+
     // inherit Grails' default dependencies
     inherits("global") {
         // specify dependency exclusions here; for example, uncomment this to disable ehcache:
@@ -38,8 +43,11 @@ grails.project.dependency.resolution = {
         grailsPlugins()
         grailsHome()
         mavenLocal()
+        jcenter()
         grailsCentral()
         mavenCentral()
+
+        mavenRepo "http://dl.bintray.com/alkemist/maven/"
         // uncomment these (or add new ones) to enable remote dependency resolution from public Maven repositories
         //mavenRepo "http://repository.codehaus.org"
         //mavenRepo "http://download.java.net/maven/2/"
@@ -51,6 +59,10 @@ grails.project.dependency.resolution = {
         // runtime 'mysql:mysql-connector-java:5.1.29'
         runtime 'org.postgresql:postgresql:9.3-1101-jdbc41'
         test "org.grails:grails-datastore-test-support:1.0.2-grails-2.4"
+
+        test("org.seleniumhq.selenium:selenium-support:$seleniumVersion") // Required fx to set values in select
+        test("org.seleniumhq.selenium:selenium-firefox-driver:$seleniumVersion")
+        test "org.gebish:geb-spock:$gebVersion"
     }
 
     plugins {
@@ -66,6 +78,10 @@ grails.project.dependency.resolution = {
         runtime ":hibernate4:4.3.6.1" // or ":hibernate:3.6.10.18"
         runtime ":database-migration:1.4.0"
         runtime ":jquery:1.11.1"
+
+        test "org.grails.plugins:geb:$gebVersion"
+
+        compile ":remote-control:2.0"
 
         // Uncomment these to enable additional asset-pipeline capabilities
         //compile ":sass-asset-pipeline:1.9.0"
