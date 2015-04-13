@@ -15,7 +15,7 @@ class UglyTestWithoutStructureSpec extends GebReportingSpec {
 
     void "Goto list of ships page"() {
         when:
-        go 'http://localhost:8080/bsg/ship/list'
+        go 'http://localhost:8088/bsg/ship/list'
 
         then:
         $('h1').text() == 'The Fleet'
@@ -45,7 +45,7 @@ class UglyTestWithoutStructureSpec extends GebReportingSpec {
 
     void "Check new value at ship list page"() {
         when:
-        go 'http://localhost:8080/bsg/ship/list'
+        go 'http://localhost:8088/bsg/ship/list'
 
         and:
         Navigator dd = $('dd', text: 'Colonial One')
