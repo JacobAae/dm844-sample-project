@@ -1,10 +1,10 @@
 import grails.util.BuildSettings
+import org.openqa.selenium.firefox.FirefoxDriver
 
 
 System.setProperty(BuildSettings.FUNCTIONAL_BASE_URL_PROPERTY, 'http://localhost:8088/bsg')
 //baseUrl = "http://localhost:8088/bsg"
 
-/*
 import org.openqa.selenium.chrome.ChromeDriver
 import org.openqa.selenium.Dimension
 import org.openqa.selenium.Point
@@ -45,5 +45,3 @@ private String driverLocationDependingOnOperatingSystem() {
     return "http://chromedriver.storage.googleapis.com/2.9/chromedriver_linux64.zip"
 
 }
-
-*/
