@@ -78,6 +78,7 @@
 
 			</dl>
 				<g:link controller="ship" action="edit" id="${shipInstance.id}">Edit</g:link>
+
 			</article>
 		</g:each>
 

@@ -5,7 +5,7 @@ import modules.ship.ShipInfoModule
 
 class ListPage extends Page {
 
-    static url = "ship/list"
+    static url = "ship/index"
 
     static at = {
         title ==~ /The Fleet/
