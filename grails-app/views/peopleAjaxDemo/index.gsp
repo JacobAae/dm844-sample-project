@@ -55,6 +55,7 @@
 		<div id="ajax-content">&nbsp;</div>
 
 		<button id="ajax-activation">Using load</button>
+		<button id="duplication-activation">Mixed result json</button>
 
 
 		<script>
@@ -116,14 +117,37 @@
 				});
 
 			});
+
+			$('#duplication-activation').on( 'click' , function() {
+				$.ajax({
+					url: '${g.createLink(controller: 'peopleAjaxDemo', action: 'somePersonJson')}',
+					type: "GET",
+					dataType : "json", // Expected return type: text, html, script, json, jsonp, xml
+					success: function( json ) {
+						console.debug("Retrieved person with id: " + json.id)
+						console.debug("Last updated is: " + json.lastUpdated)
+						var duplicatePerson = $(json.personHtml)
+						$('#ajax-content').html(json.quote);
+						$('#people').append( duplicatePerson );
+					},
+					error: function( xhr, status, errorThrown ) {
+						alert( "Auch. Thats not good :(" );
+					}
+				});
+			});
+
+
+
 		</script>
 
 		<br/>
 		<br/>
 		<h2>People</h2>
-		<g:each in="${people}" var="person">
+		<section id="people">
+			<g:each in="${people}" var="person">
 				<g:render template="person" model="[person:person]"/>
-		</g:each>
+			</g:each>
+		</section>
 
 
 	</div>

@@ -1,6 +1,7 @@
 package dk.dm844.bsg
 
 import grails.converters.JSON
+import grails.converters.XML
 import org.apache.http.HttpStatus
 
 class PeopleAjaxDemoController {
@@ -15,7 +16,8 @@ class PeopleAjaxDemoController {
 	}
 
 	def quote() {
-		render( quoteService.randomQuote )
+		String quote = quoteService.randomQuote
+		render( quote )
 	}
 
 	def quoteJson() {
@@ -31,6 +33,44 @@ class PeopleAjaxDemoController {
 	def updateTitle(Long id, String title) {
 		Person person = personService.updateTitle(id, title)
 		render(template: 'person', model: [person: person])
+	}
+
+	def somePersonJson() {
+		Person person = Person.list([sort:'lastUpdated', order:'desc',max:1]).first()
+		String personHtml = g.render(template: 'person', model: [person: person])
+		Map jsonMap = [
+				id: person.id,
+				quote: 	"<h2>${quoteService.randomQuote}</h2>",
+		        lastUpdated: person.lastUpdated,
+				personHtml: personHtml
+		]
+		render( jsonMap as JSON )
+	}
+
+	def personOutputDemo() {
+		Person person = Person.list([sort:'lastUpdated', order:'desc',max:1]).first()
+
+		withFormat {
+			html { render(template: 'person', model: [person: person])}
+			xml { render person as XML }
+			json { render person as JSON }
+		}
+		// Or respond person - if all identical
+	}
+
+	def marshallerDemo() {
+		JSON.registerObjectMarshaller(Person) {
+			def map = [
+			        name: it.name,
+					updated: g.formatDate(date: it.lastUpdated, format: 'yyyy-MM-dd')
+			]
+			return map
+		}
+		render( Person.list() as JSON)
+	}
+
+	def angularDemo() {
+
 	}
 
 }

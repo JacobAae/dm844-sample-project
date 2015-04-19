@@ -5,6 +5,8 @@ class Person {
 	String name
 	String title
 
+	Date lastUpdated
+
 	static belongsTo = [homeShip: Ship]
 	static hasMany = [ solvedCrisis: Crisis ]
 
