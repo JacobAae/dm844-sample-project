@@ -8,6 +8,12 @@ class BootStrap {
 
         development {
             createData()
+	        Ship bsg = Ship.findByName('Battlestar Galactica')
+	        ['Starbuck', 'Lee Adama', 'William Adama', 'Saul Tigh'].each {
+		        bsg.addToCrewmembers(new Person(name: it))
+		        bsg.save()
+	        }
+
         }
         test {
             createData()
