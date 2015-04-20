@@ -2,7 +2,8 @@ package dk.dm844.bsg
 
 import grails.converters.JSON
 import grails.converters.XML
-import org.apache.http.HttpStatus
+import org.springframework.http.HttpStatus
+
 
 class PeopleAjaxDemoController {
 
@@ -26,7 +27,7 @@ class PeopleAjaxDemoController {
 			status: 'You received a quote'
 		]
 		Thread.sleep(3000) // Fake calculation takes 3 seconds
-//		response.sendError(HttpStatus.SC_UNAUTHORIZED, 'For some reason, you are not allowed to call this method :(')
+		response.sendError(HttpStatus.UNAUTHORIZED, 'For some reason, you are not allowed to call this method :(')
 		render( result as JSON )
 	}
 

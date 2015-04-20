@@ -1,3 +1,4 @@
+import dk.dm844.bsg.Message
 import dk.dm844.bsg.Person
 import dk.dm844.bsg.Ship
 import dk.dm844.bsg.Shiptype
@@ -10,8 +11,13 @@ class BootStrap {
             createData()
 	        Ship bsg = Ship.findByName('Battlestar Galactica')
 	        ['Starbuck', 'Lee Adama', 'William Adama', 'Saul Tigh'].each {
-		        bsg.addToCrewmembers(new Person(name: it))
-		        bsg.save()
+                Person person = new Person(name: it)
+		        bsg.addToCrewmembers(person)
+		        bsg.save(flush: true)
+
+                person.save(flush: true)
+                Message message = new Message(from: person, message: "Hi I'm ${person.name}")
+                message.save(failOnError: true)
 	        }
 
         }

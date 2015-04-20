@@ -2,7 +2,7 @@ package dk.dm844.bsg
 
 import grails.rest.Resource
 
-@Resource
+@Resource(formats = ['json'])
 class Message {
 
 	Person from
