@@ -20,12 +20,10 @@
 	<h1>Angular Demo</h1>
 
 	<div ng-controller="InfoCtrl">
-		<div class="allPersons" ng-cloak>
 			<div class="some-message" ng-repeat="message in allMessages">
 				<div class="from">{{message.from.id}}</div>
 				<div class="info">{{message.message}}</div>
 			</div>
-		</div>
 	</div>
 
 </body>

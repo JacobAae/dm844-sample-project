@@ -25,7 +25,7 @@
 			float:left;
 			width:70%;
 		}
-		#ajax-content {
+		.ajax-content {
 			padding: 20px;
 			margin: 15px;
 			background-color: #abbf78;
@@ -52,9 +52,17 @@
 
 		<span id="loading-indicator">Loading...</span>
 
-		<div id="ajax-content">&nbsp;</div>
+		<div id="ajax-content" class="ajax-content">&nbsp;</div>
 
-		<button id="ajax-activation">Using load</button>
+		<br/>
+		<br/>
+
+
+		<div class="ajax-content">
+			<g:randomChuckNorrisJoke/>
+		</div>
+
+		<button id="ajax-activation">Using AJAX-Method</button>
 		<button id="duplication-activation">Mixed result json</button>
 
 
@@ -83,6 +91,7 @@
 						type: "GET",
 						dataType : "json", // Expected return type: text, html, script, json, jsonp, xml
 						success: function( json ) {
+							console.debug(json);
 							$('#ajax-content').html(json.quote);
 							alert(json.status);
 						},
@@ -98,7 +107,6 @@
 					});
 				});
 
-
 				$(document).bind("ajaxSend", function(){
 					$("#loading-indicator").fadeIn();
 				}).bind("ajaxComplete", function(){
@@ -111,7 +119,6 @@
 					var formToReplace = $(this).parent('article');
 
 					$.post( '${g.createLink(controller: 'peopleAjaxDemo', action: 'updateTitle')}', params ,function(response) {
-						$(this).css('background-color', 'red');
 						formToReplace.replaceWith(response);
 					});
 				});
