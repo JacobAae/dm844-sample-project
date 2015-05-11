@@ -120,3 +120,21 @@ log4j.main = {
 //	trace 'org.hibernate.type.descriptor.sql.BasicBinder'
 
 }
+
+
+// Added by the Spring Security Core plugin:
+grails.plugin.springsecurity.userLookup.userDomainClassName = 'dk.dm844.bsg.SecUser'
+grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'dk.dm844.bsg.SecUserSecRole'
+grails.plugin.springsecurity.authority.className = 'dk.dm844.bsg.SecRole'
+grails.plugin.springsecurity.controllerAnnotations.staticRules = [
+	'/':                              ['permitAll'],
+	'/index':                         ['permitAll'],
+	'/index.gsp':                     ['permitAll'],
+	'/assets/**':                     ['permitAll'],
+	'/**/js/**':                      ['permitAll'],
+	'/**/css/**':                     ['permitAll'],
+	'/**/images/**':                  ['permitAll'],
+	'/**/favicon.ico':                ['permitAll'],
+
+]
+

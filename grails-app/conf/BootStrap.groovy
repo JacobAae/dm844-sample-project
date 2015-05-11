@@ -1,7 +1,12 @@
 import dk.dm844.bsg.Message
+import dk.dm844.bsg.Hack
 import dk.dm844.bsg.Person
+import dk.dm844.bsg.SecRole
+import dk.dm844.bsg.SecUser
+import dk.dm844.bsg.SecUserSecRole
 import dk.dm844.bsg.Ship
 import dk.dm844.bsg.Shiptype
+import dk.dm844.bsg.UuidHack
 
 class BootStrap {
 
@@ -24,8 +29,54 @@ class BootStrap {
         test {
             createData()
         }
+        production {
+
+        }
+
+        resetHacks()
+        createUsersAndRoles()
+
     }
     def destroy = {
+    }
+
+    private resetHacks() {
+        List ids = Hack.all*.id
+        ids.each {
+            Hack.get(it).delete()
+        }
+        ids = UuidHack.all*.id
+        ids.each {
+            UuidHack.get(it).delete()
+        }
+        SecRole.all*.id.each {
+            SecRole.get(it).delete()
+        }
+        SecUser.all*.id.each {
+            SecUser.get(it).delete()
+        }
+    }
+
+    private createUsersAndRoles() {
+
+        SecRole secRole = new SecRole(authority: 'ROLE_DEMO')
+        secRole.save(failOnError: true)
+        Random random = new Random()
+
+        15.times {
+            SecUser secUser = new SecUser(username: "group-${it}", password: "group-${it}" ).save(failOnError: true)
+            SecUserSecRole.create(secUser, secRole, true)
+
+            Hack hack = new Hack(value: "Hack value for group ${it}: ${random.nextInt(1000)}", owner: secUser)
+            hack.save(failOnError: true)
+
+            UuidHack uuidHackhack = new UuidHack(value: "Hack value for group ${it}: ${random.nextInt(1000)}", owner: secUser)
+            uuidHackhack.save(failOnError: true)
+        }
+
+        Hack javascript = new Hack(value: '<script>alert("Hello XSS");</script>', owner: SecUser.findByUsername('group-0'))
+        javascript.save(failOnError: true)
+
     }
 
     private createData() {

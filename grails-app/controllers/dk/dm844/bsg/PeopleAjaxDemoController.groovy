@@ -5,9 +5,12 @@ import grails.converters.XML
 import org.springframework.http.HttpStatus
 
 
+import grails.plugin.springsecurity.annotation.Secured
+
+@Secured(['ROLE_DEMO'])
 class PeopleAjaxDemoController {
 
-//	static allowedMethods = [ quote: 'GET']
+	static allowedMethods = [ quote: 'POST']
 
 	QuoteService quoteService
 	PersonService personService
@@ -26,8 +29,8 @@ class PeopleAjaxDemoController {
 			quote: 	quoteService.randomQuote,
 			status: 'You received a quote'
 		]
-		Thread.sleep(3000) // Fake calculation takes 3 seconds
-		response.sendError(HttpStatus.UNAUTHORIZED, 'For some reason, you are not allowed to call this method :(')
+//		Thread.sleep(2000) // Fake calculation takes 2 seconds
+//		response.sendError(HttpStatus.I_AM_A_TEAPOT.value(), 'For some reason, you are not allowed to call this method :(')
 		render( result as JSON )
 	}
 

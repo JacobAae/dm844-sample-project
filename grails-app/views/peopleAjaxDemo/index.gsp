@@ -3,6 +3,7 @@
 <head>
 	<meta name="layout" content="main">
 	<title>Ajax Demo</title>
+	<asset:stylesheet src="chucknorrisStyle.css"/>
 	<style>
 		.content {
 			padding: 20px;;
@@ -59,7 +60,7 @@
 
 
 		<div class="ajax-content">
-			<g:randomChuckNorrisJoke/>
+			<cn:randomChuckNorrisJoke/>
 		</div>
 
 		<button id="ajax-activation">Using AJAX-Method</button>

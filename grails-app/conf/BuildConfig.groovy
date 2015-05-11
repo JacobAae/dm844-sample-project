@@ -28,9 +28,9 @@ grails.project.dependency.resolution = {
     repositories {
         inherits true // Whether to inherit repository definitions from plugins
 
+        mavenLocal()
         grailsPlugins()
         grailsHome()
-        mavenLocal()
         jcenter()
         grailsCentral()
         mavenCentral()
@@ -72,6 +72,13 @@ grails.project.dependency.resolution = {
 
         compile ":remote-control:2.0"
 
+        compile ":dm844-plugin:0.1"
+
+        compile ":spring-security-core:2.0-RC4"
+
+
+//        compile ":dm84-test:0.2"
+
         // Uncomment these to enable additional asset-pipeline capabilities
         //compile ":sass-asset-pipeline:1.9.0"
         //compile ":less-asset-pipeline:1.10.0"
@@ -79,5 +86,7 @@ grails.project.dependency.resolution = {
         //compile ":handlebars-asset-pipeline:1.3.0.3"
     }
 }
+
+//grails.plugin.location.'dm84-test' = "../dm84-test"
 
 grails.server.port.http = 8088
